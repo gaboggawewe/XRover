@@ -85,20 +85,32 @@ mqttc.connect("broker.hivemq.com", 1883)
 
 mqttc.loop_start()
 
-# Publicar en topic 1
-msg_info = mqttc.publish("testTECIoT/2", "\nTemperatura: %0.1f C" % temperature, qos=2)
-unacked_publish.add(msg_info.mid)
+while True:
+    distanceSensor = read_distance_sensor()
+    pressureSensor = read_pressure_sensor()
+    analogSensor = read_analog_sensor()
+    accelerometerSensor = read_accelerometer()
 
-# Publicar en topic 2
-msg_info2 = mqttc.publish("testpalo/2", "profe", qos=2)
-unacked_publish.add(msg_info2.mid)
+    msg_info_dist = mqttc.publish("nagani/distance", f"Distance: {distanceSensor:.2f} cm", qos=2)
+    unacked_publish.add(msg_info_dist.mid)
 
-# Esperando a publicar el mensaje
-while len(unacked_publish):
-    time.sleep(0.1)
+    msg_info_press = mqttc.publish("nagani/pressure", f"Temperature: {pressureSensor[0]:.1f} C, Pressure: {pressureSensor[1]:.1f} hPa, Altitude: {pressureSensor[2]:.1f} m", qos=2)
+    unacked_publish.add(msg_info_press.mid)
 
-msg_info.wait_for_publish()
-msg_info2.wait_for_publish()
+    msg_info_adc = mqttc.publish("nagani/adc", f"Analogico: {analogSensor[0]:.1f}, Volts={analogSensor[1]:.1f}", qos=2)
+    unacked_publish.add(msg_info_adc.mid)
+
+    msg_info_accel = mqttc.publish("nagani/accelerometer", f"Acceleration_x: {accelerometerSensor[0]:.2f}, Acceleration_y: {accelerometerSensor[1]:.2f}, Acceleration_z: {accelerometerSensor[2]:.2f}, Freefall: {accelerometerSensor[3]}, Tap: {accelerometerSensor[4]}, Motion: {accelerometerSensor[5]}", qos=2)
+    unacked_publish.add(msg_info_accel.mid)
+
+    while len(unacked_publish):
+        time.sleep(0.1)
+
+    msg_info_press.wait_for_publish()
+    msg_info_dist.wait_for_publish()
+    msg_info_accel.wait_for_publish()
+
+    time.sleep(5)
 
 mqttc.disconnect()
 mqttc.loop_stop()
