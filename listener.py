@@ -5,14 +5,16 @@ from mysql.connector import Error
 from databaseManager import DatabaseManager
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
 load_dotenv()
 
+# Database connection parameters
 db_host = os.getenv('DB_HOST')
 db_name = os.getenv('DB_NAME')
 db_user = os.getenv('DB_USER')
 db_password = os.getenv('DB_PASSWORD')
 
-
+# Function to insert data into the database
 def insert_data(cursor, query, values):
     try:
         cursor.execute(query, values)
@@ -20,19 +22,21 @@ def insert_data(cursor, query, values):
     except Error as e:
         print(f"Error: {e}")
 
-# MQTT callbacks
+# MQTT callback when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected successfully")
-        client.subscribe("nagani/#")
+        client.subscribe("nagani/#")  # Subscribe to all topics under 'nagani'
     else:
         print(f"Connection failed with result code {rc}")
 
+# MQTT callback when a message is received
 def on_message(client, userdata, msg):
     print(f"Received message: {msg.topic} -> {msg.payload.decode()}")
     connection = userdata['db_connection']
     cursor = connection.cursor()
 
+    # Handle messages for different topics
     if msg.topic == "nagani/distance":
         query = "INSERT INTO distance_sensor_data (distance) VALUES (%s)"
         values = (float(msg.payload.decode().split()[1]),)
@@ -74,10 +78,12 @@ if db_connection is None:
     print("Failed to connect to the database")
     exit(1)
 
+# Initialize MQTT client and set callbacks
 client = mqtt.Client()
 client.user_data_set({'db_connection': db_connection})
 client.on_connect = on_connect
 client.on_message = on_message
 
+# Connect to the MQTT broker and start the loop
 client.connect("broker.hivemq.com", 1883, 60)
 client.loop_forever()

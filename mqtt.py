@@ -8,6 +8,7 @@ import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import paho.mqtt.client as mqtt
 
+# Function to read data from the accelerometer
 def read_accelerometer():
     i2c = busio.I2C(board.SCL, board.SDA)
     accel = adafruit_adxl34x.ADXL345(i2c)
@@ -21,6 +22,7 @@ def read_accelerometer():
     motion = accel.events['motion']
     return acceleration_x, acceleration_y, acceleration_z, freefall, tap, motion
 
+# Function to read data from the distance sensor
 def read_distance_sensor():
     GPIO.setmode(GPIO.BCM)
     TRIG = 23
@@ -49,7 +51,7 @@ def read_distance_sensor():
     GPIO.cleanup()
     return distance
 
-
+# Function to read data from the pressure sensor
 def read_pressure_sensor():
     i2c = board.I2C()
     bmp280 = adafruit_bmp280.Adafruit_BMP280_I2C(i2c, address=0x76)
@@ -59,7 +61,7 @@ def read_pressure_sensor():
     altitude = bmp280.altitude
     return temperature, pressure, altitude
 
-
+# Function to read data from the analog sensor
 def read_analog_sensor():
     i2c = busio.I2C(board.SCL, board.SDA)
     ads = ADS.ADS1115(i2c)
@@ -68,14 +70,14 @@ def read_analog_sensor():
     volts = channel.voltage
     return analogico, volts
 
+# Callback function for when a message is published
 def on_publish(client, userdata, mid, reason_code, properties):
-   
     try:
         userdata.remove(mid)
     except KeyError:
         print("Error")
- 
 
+# Set to keep track of unacknowledged messages
 unacked_publish = set()
 mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 mqttc.on_publish = on_publish
@@ -85,6 +87,7 @@ mqttc.connect("broker.hivemq.com", 1883)
 
 mqttc.loop_start()
 
+# Main loop to read sensor data and publish to MQTT broker
 while True:
     distanceSensor = read_distance_sensor()
     pressureSensor = read_pressure_sensor()
