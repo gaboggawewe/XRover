@@ -110,7 +110,7 @@ while True:
     msg_info_dist.wait_for_publish()
     msg_info_accel.wait_for_publish()
 
-    time.sleep(5)
+    time.sleep(1)
 
 mqttc.disconnect()
 mqttc.loop_stop()
