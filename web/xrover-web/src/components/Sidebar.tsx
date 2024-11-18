@@ -9,6 +9,9 @@ const Sidebar = () => {
       <nav className="mt-10">
         <ul>
           <li className="p-4">
+            <Link href="/control">Control</Link>
+          </li>
+          <li className="p-4">
             <Link href="/sensors/temperature">Temperature</Link>
           </li>
           <li className="p-4">
@@ -19,9 +22,6 @@ const Sidebar = () => {
           </li>
           <li className="p-4">
             <Link href="/sensors/accelerometer">Accelerometer</Link>
-          </li>
-          <li className="p-4">
-            <Link href="/control">Control</Link>
           </li>
           <li className="p-4">
             <Link href="/sensors/all">All Sensors</Link>
