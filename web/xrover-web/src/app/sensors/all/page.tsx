@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import PressureChart from '../../../components/PressureChart';
-import DistanceChart from '../../../components/DistanceChart';
-import ADCChart from '../../../components/AdcChart';
-import AccelerometerChart from '../../../components/AccelerometerChart';
+import PressureChartSmall from '../../../components/PressureChartSmall';
+import DistanceChartSmall from '@/components/DistanceChartSmall';
+import AccelerometerChartSmall from '@/components/AccelerometerChartSmall';
+import AdcChartSmall from '@/components/AdcChartSmall';
 
 export default function AllSensorsPage() {
   const [pressureData, setPressureData] = useState([]);
@@ -49,19 +49,19 @@ export default function AllSensorsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="mb-8">
           <h2 className="text-xl font-bold mb-2">Pressure Sensor Data</h2>
-          <PressureChart data={pressureData} />
+          <PressureChartSmall data={pressureData} />
         </div>
         <div className="mb-8">
           <h2 className="text-xl font-bold mb-2">Distance Sensor Data</h2>
-          <DistanceChart data={distanceData} />
+          <DistanceChartSmall data={distanceData} />
         </div>
         <div className="mb-8">
           <h2 className="text-xl font-bold mb-2">ADC Data</h2>
-          <ADCChart data={adcData} />
+          <AdcChartSmall data={adcData} />
         </div>
         <div className="mb-8">
           <h2 className="text-xl font-bold mb-2">Accelerometer Data</h2>
-          <AccelerometerChart data={accelerometerData} />
+          <AccelerometerChartSmall data={accelerometerData} />
         </div>
       </div>
     </div>

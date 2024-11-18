@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import DistanceChart from '../../../components/DistanceChart';
+import DistanceChartLarge from '../../../components/DistanceChartLarge';
 
 export default function DistancePage() {
   const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ export default function DistancePage() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Distance Sensor Data</h1>
-      <DistanceChart data={data} />
+      <DistanceChartLarge data={data} />
     </div>
   );
 }

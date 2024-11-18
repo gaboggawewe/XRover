@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ADCChart from '../../../components/AdcChart';
+import AdcChartLarge from '../../../components/AdcChartLarge';
 
 export default function ADCPage() {
   const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ export default function ADCPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">ADC Data</h1>
-      <ADCChart data={data} />
+      <AdcChartLarge data={data} />
     </div>
   );
 }

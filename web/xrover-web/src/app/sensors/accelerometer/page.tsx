@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import AccelerometerChart from '../../../components/AccelerometerChart';
+import AccelerometerChartLarge from '../../../components/AccelerometerChartLarge';
 
 export default function AccelerometerPage() {
   const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ export default function AccelerometerPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Accelerometer Data</h1>
-      <AccelerometerChart data={data} />
+      <AccelerometerChartLarge data={data} />
     </div>
   );
 }

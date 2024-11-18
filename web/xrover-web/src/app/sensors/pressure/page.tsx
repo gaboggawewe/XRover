@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import PressureChart from '../../../components/PressureChart';
+import PressureChartLarge from '../../../components/PressureChartLarge';
 
 export default function PressurePage() {
   const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ export default function PressurePage() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Pressure Sensor Data</h1>
-      <PressureChart data={data} />
+      <PressureChartLarge data={data} />
     </div>
   );
 }
