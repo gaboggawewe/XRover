@@ -2,7 +2,7 @@ import os
 import paho.mqtt.client as mqtt
 import mysql.connector
 from mysql.connector import Error
-from databaseManager import DatabaseManager
+from src.database.databaseManager import DatabaseManager
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
