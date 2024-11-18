@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import SensorChart from '../../../components/SensorChart';
+import DistanceChart from '../../../components/DistanceChart';
 
 export default function DistancePage() {
   const [data, setData] = useState([]);
@@ -9,16 +9,8 @@ export default function DistancePage() {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('/api/distance-data');
-      if (response.ok) {
-        const result = await response.json();
-        const formattedData = result.map((row: any) => ({
-          name: row.time,
-          value: row.distance,
-        }));
-        setData(formattedData);
-      } else {
-        console.error('Failed to fetch data');
-      }
+      const result = await response.json();
+      setData(result);
     }
 
     fetchData();
@@ -27,7 +19,7 @@ export default function DistancePage() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Distance Sensor Data</h1>
-      <SensorChart data={data} />
+      <DistanceChart data={data} />
     </div>
   );
 }
