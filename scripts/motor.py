@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 from time import sleep
+import paho.mqtt.client as mqtt
 
 # Set up GPIO mode
 GPIO.setmode(GPIO.BOARD)
@@ -42,9 +43,9 @@ def move_backward():
     GPIO.output(Motor5, GPIO.HIGH)
     GPIO.output(Motor6, GPIO.HIGH)
 
-# Function to rotate right
-def rotate_right():
-    print("Rotar a la derecha")
+# Function to turn left
+def turn_left():
+    print("Izquierda")
     GPIO.output(Motor1, GPIO.HIGH)
     GPIO.output(Motor2, GPIO.LOW)
     GPIO.output(Motor3, GPIO.HIGH)
@@ -52,9 +53,9 @@ def rotate_right():
     GPIO.output(Motor5, GPIO.HIGH)
     GPIO.output(Motor6, GPIO.HIGH)
 
-# Function to rotate left
-def rotate_left():
-    print("Rotar a la izquierda")
+# Function to turn right
+def turn_right():
+    print("Derecha")
     GPIO.output(Motor1, GPIO.LOW)
     GPIO.output(Motor2, GPIO.HIGH)
     GPIO.output(Motor3, GPIO.HIGH)
@@ -62,35 +63,44 @@ def rotate_left():
     GPIO.output(Motor5, GPIO.LOW)
     GPIO.output(Motor6, GPIO.HIGH)
 
-# Function to stop the motors
+# Function to stop
 def stop():
     print("Detener")
     GPIO.output(Motor3, GPIO.LOW)
     GPIO.output(Motor6, GPIO.LOW)
 
-# Main loop to read user input and control the motors
-print("Presiona 'w' para avanzar, 's' para retroceder, 'a' para rotar a la izquierda, 'd' para rotar a la derecha, y 'q' para salir.")
+# MQTT callback function for when a message is received
+def on_message(client, userdata, message):
+    command = message.payload.decode()
+    print(f"Received command: {command}")
+    if command == "forward":
+        move_forward()
+    elif command == "backward":
+        move_backward()
+    elif command == "left":
+        turn_left()
+    elif command == "right":
+        turn_right()
+    elif command == "stop":
+        stop()
+
+# MQTT setup
+broker_address = "broker.hivemq.com"
+client = mqtt.Client("MotorController")
+client.on_message = on_message
+
+client.connect(broker_address)
+client.subscribe("nagani/control")
+
+client.loop_start()
+
+# Keep the script running
 try:
     while True:
-        tecla = input()
-        if tecla == 'w':
-            move_forward()
-        elif tecla == 's':
-            move_backward()
-        elif tecla == 'a':
-            rotate_left()
-            sleep(0.5)
-            stop()
-        elif tecla == 'd':
-            rotate_right()
-            sleep(0.5)
-            stop()
-        elif tecla == 'q':
-            stop()
-            print("Saliendo...")
-            break
-        sleep(0.1)  # Pequeña pausa para evitar un uso excesivo de la CPU
+        sleep(1)
 except KeyboardInterrupt:
     pass
 finally:
     GPIO.cleanup()
+    client.loop_stop()
+    client.disconnect()
