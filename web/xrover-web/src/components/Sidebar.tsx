@@ -5,7 +5,7 @@ import { MdOutlineSensors, MdElectricBolt } from "react-icons/md";
 
 const Sidebar = () => {
   return (
-    <div className="w-64 h-screen bg-gray-800 text-white">
+    <div className="fixed top-0 left-0 w-64 h-screen bg-gray-800 text-white z-50 overflow-y-auto">
       <div className="p-4 mt-8 mr-2 flex flex-col items-center">
         <Link href="/">
             <Image src="/Rover2.png" alt="XRover Logo" width={125} height={125} className="cursor-pointer" />
