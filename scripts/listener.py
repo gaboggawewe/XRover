@@ -1,9 +1,13 @@
+import sys
 import os
 import paho.mqtt.client as mqtt
 import mysql.connector
 from mysql.connector import Error
-from src.database.databaseManager import DatabaseManager
 from dotenv import load_dotenv
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.database.databaseManager import DatabaseManager
 
 # Load environment variables from .env file
 load_dotenv()
