@@ -17,9 +17,11 @@ export default function ADCPage() {
   }, []);
 
   return (
-    <div>
+    <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">ADC Data</h1>
-      <AdcChartLarge data={data} />
+      <div className="w-full h-screen">
+        <AdcChartLarge data={data} />
+      </div>
     </div>
   );
 }

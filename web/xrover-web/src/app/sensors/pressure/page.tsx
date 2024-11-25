@@ -17,9 +17,11 @@ export default function PressurePage() {
   }, []);
 
   return (
-    <div>
+    <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Pressure Sensor Data</h1>
-      <PressureChartLarge data={data} />
+      <div className="w-full h-screen">
+        <PressureChartLarge data={data} />
+      </div>
     </div>
   );
 }

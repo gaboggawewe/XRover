@@ -28,9 +28,11 @@ export default function AccelerometerPage() {
   }, []);
 
   return (
-    <div>
+    <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Accelerometer Data</h1>
-      <AccelerometerChartLarge data={data} />
+      <div className="w-full h-screen">
+        <AccelerometerChartLarge data={data} />
+      </div>
     </div>
   );
 }

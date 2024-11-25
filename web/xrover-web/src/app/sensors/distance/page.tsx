@@ -17,9 +17,11 @@ export default function DistancePage() {
   }, []);
 
   return (
-    <div>
+    <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Distance Sensor Data</h1>
-      <DistanceChartLarge data={data} />
+      <div className="w-full h-screen">
+        <DistanceChartLarge data={data} />
+      </div>
     </div>
   );
 }
