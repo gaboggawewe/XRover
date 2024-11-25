@@ -1,8 +1,9 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const DistanceChartLarge = ({ data }) => {
+const PressureChart = ({ data }) => {
   return (
     <div className="w-full h-full">
+      <h2>Pressure Over Time</h2>
       <ResponsiveContainer width="100%" aspect={2}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -10,11 +11,11 @@ const DistanceChartLarge = ({ data }) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="distance" stroke="#8884d8" />
+          <Line type="monotone" dataKey="pressure" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     </div>
   );
 };
 
-export default DistanceChartLarge;
+export default PressureChart;
