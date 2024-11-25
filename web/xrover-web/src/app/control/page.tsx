@@ -24,11 +24,11 @@ export default function ControlPage() {
   };
 
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col items-center h-full">
       <h1 className="text-4xl font-bold mb-8 text-left">Control the XRover</h1>
-      <div className="flex justify-center items-center flex-grow">
+      <div className="flex justify-center  items-center flex-grow">
         <div className="p-4">
-          <div className="grid grid-cols-3 gap-4 place-items-center">
+          <div className="grid grid-cols-3 gap-10 place-items-center">
             <button onClick={handleMoveForward} className="bg-blue-500 text-white text-xl px-12 py-8 rounded hover:bg-blue-700 col-start-2">
               Move Forward
             </button>
