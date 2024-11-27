@@ -7,13 +7,24 @@ export default function DistancePage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api/distance-data');
-      const result = await response.json();
-      setData(result);
-    }
-
-    fetchData();
+      async function fetchData() {
+        try {
+          const response = await fetch('/api/distance-data');
+          if (response.ok) {
+            const result = await response.json();
+            setData(result);
+          } else {
+            console.error('Failed to fetch data');
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+  
+      fetchData();
+      const interval = setInterval(fetchData, 1000); // Fetch data every second
+  
+      return () => clearInterval(interval);
   }, []);
 
   return (

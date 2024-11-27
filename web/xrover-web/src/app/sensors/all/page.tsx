@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import PressureChartSmall from '../../../components/PressureChartSmall';
+import { useEffect, useState } from 'react'; 
+import PressureChartSmall from '@/components/PressureChartSmall';
 import DistanceChartSmall from '@/components/DistanceChartSmall';
 import AccelerometerChartSmall from '@/components/AccelerometerChartSmall';
 import AdcChartSmall from '@/components/AdcChartSmall';
+import AltitudeChartSmall from '@/components/AltituteChartSmall';
+import TemperatureChartSmall from '@/components/TemperatureChartSmall';
 
 export default function AllSensorsPage() {
   const [pressureData, setPressureData] = useState([]);
@@ -41,6 +43,15 @@ export default function AllSensorsPage() {
     fetchDistanceData();
     fetchAdcData();
     fetchAccelerometerData();
+
+    const interval = setInterval(() => {
+      fetchPressureData();
+      fetchDistanceData();
+      fetchAdcData();
+      fetchAccelerometerData();
+    }, 1000); // Fetch data every second
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -50,6 +61,14 @@ export default function AllSensorsPage() {
         <div className="mb-8">
           <h2 className="text-xl font-bold mb-2">Pressure Sensor Data</h2>
           <PressureChartSmall data={pressureData} />
+        </div>
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2">Temperature Sensor Data</h2>
+          <TemperatureChartSmall data={pressureData} />
+        </div>
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2">Altitude Sensor Data</h2>
+          <AltitudeChartSmall data={pressureData} />
         </div>
         <div className="mb-8">
           <h2 className="text-xl font-bold mb-2">Distance Sensor Data</h2>
