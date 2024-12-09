@@ -4,7 +4,7 @@
 
 XRover is an autonomous rover project with sensor integration. The rover is designed to move and collect data from various sensors, including an accelerometer, pressure sensor, distance sensor, and ADC (Analog-to-Digital Converter). The data is sent via MQTT and visualized in a web application.
 
-![XRover](images/xrover.png)
+[![XRover](images/xrover.png)](https://www.youtube.com/shorts/KBhfExidcCY)
 
 ## Features
 
@@ -84,3 +84,8 @@ XRover is an autonomous rover project with sensor integration. The rover is desi
 ![ADC](images/adc.png)
 ![All 1](images/all1.png)
 ![All 2](images/all2.png)
+
+## Contributors
+Alejandro Ignacio Vargas Cruz - [GitHub Profile](https://github.com/AlexNachoVC)
+Gabriel Gutiérrez Guerra - [GitHub Profile](https://github.com/gaboggawewe)
+Santiago Ramírez Niño - [GitHub Profile](https://github.com/SantiagoNinoX)
