@@ -87,5 +87,5 @@ XRover is an autonomous rover project with sensor integration. The rover is desi
 
 ## Contributors
 Alejandro Ignacio Vargas Cruz - [GitHub Profile](https://github.com/AlexNachoVC) <br>
-Gabriel Gutiérrez Guerra - [GitHub Profile](https://github.com/gaboggawewe) <br>
 Santiago Ramírez Niño - [GitHub Profile](https://github.com/SantiagoNinoX) <br>
+Gabriel Gutiérrez Guerra - [GitHub Profile](https://github.com/gaboggawewe) <br>
